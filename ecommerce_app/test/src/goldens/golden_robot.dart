@@ -59,12 +59,4 @@ class GoldenRobot {
     }
     await tester.pumpAndSettle();
   }
-
-  /// Sets the surface size.
-  /// Useful for generating golden image tests of different sizes
-  Future<void> setSurfaceSize(Size size) async {
-    await tester.binding.setSurfaceSize(size);
-    tester.binding.window.physicalSizeTestValue = size;
-    tester.binding.window.devicePixelRatioTestValue = 1.0;
-  }
 }

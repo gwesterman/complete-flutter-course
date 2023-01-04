@@ -16,7 +16,7 @@ void main() {
     (tester) async {
       final r = Robot(tester);
       final currentSize = sizeVariant.currentValue!;
-      await r.golden.setSurfaceSize(currentSize);
+      await r.setSurfaceSize(currentSize);
       await r.golden.loadRobotoFont();
       await r.golden.loadMaterialIconFont();
       await r.pumpMyApp();

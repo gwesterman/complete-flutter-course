@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:ecommerce_app/src/app.dart';
 import 'package:ecommerce_app/src/features/authentication/data/fake_auth_repository.dart';
 import 'package:ecommerce_app/src/features/cart/application/cart_sync_service.dart';
@@ -78,5 +79,13 @@ class Robot {
     expect(finder, findsOneWidget);
     await tester.tap(finder);
     await tester.pumpAndSettle();
+  }
+
+  /// Sets the surface size.
+  /// Useful for generating tests of different sizes
+  Future<void> setSurfaceSize(Size size) async {
+    await tester.binding.setSurfaceSize(size);
+    tester.binding.window.physicalSizeTestValue = size;
+    tester.binding.window.devicePixelRatioTestValue = 1.0;
   }
 }
