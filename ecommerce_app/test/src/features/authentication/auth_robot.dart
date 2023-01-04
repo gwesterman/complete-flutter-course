@@ -5,7 +5,6 @@ import 'package:ecommerce_app/src/features/authentication/data/fake_auth_reposit
 import 'package:ecommerce_app/src/features/authentication/presentation/account/account_screen.dart';
 import 'package:ecommerce_app/src/features/authentication/presentation/sign_in/email_password_sign_in_screen.dart';
 import 'package:ecommerce_app/src/features/authentication/presentation/sign_in/email_password_sign_in_state.dart';
-import 'package:ecommerce_app/src/features/products/presentation/home_app_bar/more_menu_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -15,7 +14,7 @@ class AuthRobot {
   final WidgetTester tester;
 
   Future<void> openEmailPasswordSignInScreen() async {
-    final finder = find.byKey(MoreMenuButton.signInKey);
+    final finder = find.text('Sign In');
     expect(finder, findsOneWidget);
     await tester.tap(finder);
     await tester.pumpAndSettle();
@@ -86,7 +85,7 @@ class AuthRobot {
   }
 
   Future<void> openAccountScreen() async {
-    final finder = find.byKey(MoreMenuButton.accountKey);
+    var finder = find.text('Account');
     expect(finder, findsOneWidget);
     await tester.tap(finder);
     await tester.pumpAndSettle();
@@ -112,7 +111,7 @@ class AuthRobot {
     final logoutButton = find.text('Logout');
     expect(logoutButton, findsOneWidget);
     await tester.tap(logoutButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   void expectLogoutDialogFound() {
@@ -124,7 +123,7 @@ class AuthRobot {
     final cancelButton = find.text('Cancel');
     expect(cancelButton, findsOneWidget);
     await tester.tap(cancelButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   void expectLogoutDialogNotFound() {
@@ -136,7 +135,7 @@ class AuthRobot {
     final logoutButton = find.byKey(kDialogDefaultKey);
     expect(logoutButton, findsOneWidget);
     await tester.tap(logoutButton);
-    await tester.pump();
+    await tester.pumpAndSettle();
   }
 
   void expectErrorAlertFound() {

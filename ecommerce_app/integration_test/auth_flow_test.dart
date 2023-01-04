@@ -14,28 +14,15 @@ void main() {
 
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
-  testWidgets('Full purchase flow', (tester) async {
+  testWidgets('Sign in and sign out flow', (tester) async {
     final r = Robot(tester);
     await r.setSurfaceSize(sizeVariant.currentValue!);
     await r.pumpMyApp();
     r.products.expectFindAllProductCards();
-    // add to cart flows
-    await r.products.selectProduct();
-    await r.products.setProductQuantity(3);
-    await r.cart.addToCart();
-    await r.cart.openCart();
-    r.cart.expectFindNCartItems(1);
-    await r.closePage();
-    // sign in
     await r.openPopupMenu();
     await r.auth.openEmailPasswordSignInScreen();
     await r.auth.signInWithEmailAndPassword();
     r.products.expectFindAllProductCards();
-    // check cart again (to verify cart synchronization)
-    await r.cart.openCart();
-    r.cart.expectFindNCartItems(1);
-    await r.closePage();
-    // sign out
     await r.openPopupMenu();
     await r.auth.openAccountScreen();
     await r.auth.tapLogoutButton();

@@ -28,6 +28,8 @@ class ProductsRobot {
   Future<void> setProductQuantity(int quantity) async {
     final finder = find.byIcon(Icons.add);
     expect(finder, findsOneWidget);
+    await tester.dragUntilVisible(
+        finder, find.byType(CustomScrollView), const Offset(-250, 0));
     for (var i = 1; i < quantity; i++) {
       await tester.tap(finder);
       await tester.pumpAndSettle();
